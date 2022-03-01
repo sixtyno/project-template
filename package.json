@@ -10,5 +10,11 @@
   "devDependencies": {
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
+  },
+  "dependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "semantic-release/npm",
+    "@types/node": "^17.0.21",
+    "semantic-release": "^19.0.2"
   }
 }
