@@ -10,13 +10,13 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": false
+        "npmPublish": false,
+        "registry": "https://npm.pkg.github.com"
       }
     ],
     [
       "@semantic-release/github",
       {
-        "addReleases": "top",
         "registry": "https://npm.pkg.github.com",
         "npmPublish": true
       }
