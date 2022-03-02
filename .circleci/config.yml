@@ -1,0 +1,57 @@
+version: 2.1
+
+jobs:
+  pre-build:
+    docker:
+      - image: cimg/node:17.2.0
+    steps:
+      - run: "sudo add-apt-repository universe"
+      - run: "sudo apt-get update"
+      - run: "sudo apt-get install expect"
+      - checkout
+      - run:
+          name: "Authenticate to GitHub Packages"
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+            echo "@sixtyno:registry=https://npm.pkg.github.com" >> .npmrc
+      - run:
+          name: "install dependencies"
+          command: "yarn install"
+      - run: 'git config user.email "operations@sixty.no"'
+      - run: 'git config user.name "sixty-bot"'
+      - persist_to_workspace:
+          root: ..
+          paths:
+            - project
+            - .ssh
+
+  create-release-version:
+    docker:
+      - image: cimg/node:17.2.0
+    steps:
+      - attach_workspace:
+          at: ..
+      - run:
+          name: "Authenticate to GitHub Packages"
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+            echo "@sixtyno:registry=https://npm.pkg.github.com" >> .npmrc
+      - run:
+          name: Add github.com to known hosts
+          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
+          name: Run semantic release
+          command: npm run semantic-release
+workflows:
+  sixty-flow:
+    jobs:
+      - pre-build:
+          context: sixty-general-v2-context
+      - create-release-version:
+          context: sixty-general-v2-context
+          requires:
+            - pre-build
+          filters:
+            branches:
+              only:
+                - master
