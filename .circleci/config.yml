@@ -5,18 +5,18 @@ jobs:
     docker:
       - image: cimg/node:17.2.0
     steps:
-      - run: 'sudo add-apt-repository universe'
-      - run: 'sudo apt-get update'
-      - run: 'sudo apt-get install expect'
+      - run: "sudo add-apt-repository universe"
+      - run: "sudo apt-get update"
+      - run: "sudo apt-get install expect"
       - checkout
       - run:
-          name: 'Authenticate to GitHub Packages'
+          name: "Authenticate to GitHub Packages"
           command: |
             echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
             echo "@sixtyno:registry=https://npm.pkg.github.com" >> .npmrc
       - run:
-          name: 'install dependencies'
-          command: 'yarn install'
+          name: "install dependencies"
+          command: "yarn install"
       - run: 'git config user.email "operations@sixty.no"'
       - run: 'git config user.name "sixty-bot"'
       - persist_to_workspace:
@@ -32,7 +32,7 @@ jobs:
       - attach_workspace:
           at: ..
       - run:
-          name: 'Authenticate to GitHub Packages'
+          name: "Authenticate to GitHub Packages"
           command: |
             echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
             echo "@sixtyno:registry=https://npm.pkg.github.com" >> .npmrc
@@ -42,11 +42,6 @@ jobs:
       - run:
           name: Run semantic release
           command: npm run semantic-release
-      - run:
-          name: Publish package to GitHub registry
-          command: |
-            npm run build
-            npm publish
 workflows:
   sixty-flow:
     jobs:
