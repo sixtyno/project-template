@@ -1,6 +1,6 @@
 {
   "branches": [
-    "master",
+    "master"
   ],
   "debug": false,
   "ci": true,
@@ -16,7 +16,9 @@
     [
       "@semantic-release/github",
       {
-        "addReleases": "top"
+        "addReleases": "top",
+        "registry": "https://npm.pkg.github.com",
+        "npmPublish": true
       }
     ],
     [
