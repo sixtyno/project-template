@@ -42,6 +42,11 @@ jobs:
       - run:
           name: Run semantic release
           command: npm run semantic-release
+      - run:
+          name: Publish package to GitHub registry
+          command: |
+            yarn build
+            yarn publish
 workflows:
   sixty-flow:
     jobs:
