@@ -10,8 +10,7 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": false,
-        "registry": "https://npm.pkg.github.com"
+        "npmPublish": false
       }
     ],
     [
