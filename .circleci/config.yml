@@ -46,7 +46,7 @@ jobs:
           name: Publish package to GitHub registry
           command: |
             yarn build
-            npm publish
+            yarn publish
 workflows:
   sixty-flow:
     jobs:
