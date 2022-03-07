@@ -16,8 +16,7 @@
     [
       "@semantic-release/github",
       {
-        "registry": "https://npm.pkg.github.com",
-        "npmPublish": true
+        "addReleases": "top"
       }
     ],
     [
