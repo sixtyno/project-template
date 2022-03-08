@@ -24,6 +24,6 @@
     "url": "https://github.com/sixtyno/project-template.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com@sixtyno"
+    "registry": "https://npm.pkg.github.com"
   }
 }

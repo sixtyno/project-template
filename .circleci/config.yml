@@ -32,6 +32,11 @@ jobs:
       - attach_workspace:
           at: ..
       - run:
+        name: "Authenticate to GitHub Packages"
+        command: |
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+          echo "@sixtyno:registry=https://npm.pkg.github.com" >> .npmrc
+      - run:
           name: Add github.com to known hosts
           command: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run:
